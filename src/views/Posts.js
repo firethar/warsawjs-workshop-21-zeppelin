@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { postsFetch } from "../actions/posts/";
 
+import { Link } from "react-router-dom";
+
 const mapsStateToProps = ({ posts }) => ({
   posts: posts.posts,
   fetching: posts.fetching,
@@ -13,11 +15,11 @@ class Posts extends React.Component {
   }
   render() {
     const posts = this.props.posts.map(post => (
-      <div key={`posts-${post.id}`}>
+      <Link to={`/posts/${post.id}`} key={`posts-${post.id}`}>
         <h2>{post.title}</h2>
         <h3>{post.owner}</h3>
         <img src={post.image} alt=""/>
-      </div>
+      </Link>
     ));
 
     return (
