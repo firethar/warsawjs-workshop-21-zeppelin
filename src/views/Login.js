@@ -2,9 +2,11 @@ import React from "react";
 import { login } from "../actions/user";
 import { connect } from "react-redux";
 
+import Button from '@material-ui/core/Button';
+
 
 const mapsStateToProps = state => ({
-  fetching: state.fetching
+  fetching: state.user.fetching
 });
 
 class Login extends React.Component {
@@ -52,7 +54,7 @@ class Login extends React.Component {
           value={this.state.password} 
           onChange={this.onChangePassword} />
 
-          <button>Submit</button>
+          <Button variant="contained" color="primary">Submit</Button>
         </form>
       )
   
