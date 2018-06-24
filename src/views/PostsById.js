@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { commentsFetch } from "../actions/comments/";
 import { postsFetch } from "../actions/posts/";
+import isLoggedIn from "../components/isLoggedIn";
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -48,4 +49,4 @@ class PostsById extends React.Component {
   }
 }
 
-export default connect(mapsStateToProps)(PostsById)
+export default isLoggedIn(connect(mapsStateToProps)(PostsById));

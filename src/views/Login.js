@@ -1,12 +1,14 @@
 import React from "react";
 import { login } from "../actions/user";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
 
 
 const mapsStateToProps = state => ({
-  fetching: state.user.fetching
+  fetching: state.user.fetching,
+  username: state.user.username,
 });
 
 class Login extends React.Component {
@@ -39,6 +41,10 @@ class Login extends React.Component {
   }
 
   render() {
+  if(this.props.username !== "") {
+    return (<Redirect to="/posts/" />);
+  }
+
     if (!this.props.fetching) {
       return (
         <form onSubmit={this.onSubmit}>
