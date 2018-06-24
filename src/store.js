@@ -1,7 +1,7 @@
-import { crateStore, applyMiddleware, createStore } from "redux";
+import {  createStore, applyMiddleware } from "redux";
 import reducers from "./reducer/user/";
 
-import thunk from "react-thunk";
+import thunk from "redux-thunk";
 import logger from "redux-logger";
 
 const store = createStore (
