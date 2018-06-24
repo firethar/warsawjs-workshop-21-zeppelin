@@ -1,7 +1,11 @@
 import React from "react";
-import { startLogin } from "../actions/user";
+import { login } from "../actions/user";
 import { connect } from "react-redux";
 
+
+const mapsStateToProps = state => ({
+  fetching: state.fetching
+});
 
 class Login extends React.Component {
   constructor () {
@@ -17,7 +21,7 @@ class Login extends React.Component {
 
     const {username, password} = this.state;
     
-    this.props.dispatch(startLogin(username, password));
+    this.props.dispatch(login(username, password));
 
   }
 
@@ -33,23 +37,31 @@ class Login extends React.Component {
   }
 
   render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <h1>Login</h1>
+    if (!this.props.fetching) {
+      return (
+        <form onSubmit={this.onSubmit}>
+          <h1>Login</h1>
+  
+          <input type="text" 
+          placeholder="username" 
+          value={this.state.username} 
+          onChange={this.onChangeUsername} />
+  
+          <input type="password" 
+          placeholder="password" 
+          value={this.state.password} 
+          onChange={this.onChangePassword} />
 
-        <input type="text" 
-        placeholder="username" 
-        value={this.state.username} 
-        onChange={this.onChangeUsername} />
-
-        <input type="password" 
-        placeholder="password" 
-        value={this.state.password} 
-        onChange={this.onChangePassword} />
-        <button>Submit</button>
-      </form>
-    )
+          <button>Submit</button>
+        </form>
+      )
+  
+    } else {
+      return (<div>
+        Loading...
+      </div>)
+    }
   }
 }
 
-export default connect()(Login);
+export default connect(mapsStateToProps)(Login);
